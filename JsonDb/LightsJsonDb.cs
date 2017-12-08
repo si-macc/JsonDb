@@ -50,7 +50,7 @@ namespace JsonDb
             }
             catch (IOException)
             {
-                CrestronConsole.PrintLine("Read JSON DB File IO Exception\n\r");    //Generate error
+                CrestronConsole.PrintLine("Read to JSON DB File IO Exception\n\r");    //Generate error
             }
 
             CrestronConsole.PrintLine("Extractor Starting...\n\r");    //Generate error
@@ -83,7 +83,7 @@ namespace JsonDb
             }
             catch (IOException)
             {
-                CrestronConsole.PrintLine("Write JSON DB File IO Exception\n\r");    //Generate error
+                CrestronConsole.PrintLine("Write to JSON DB File IO Exception\n\r");    //Generate error
             }
         }
 
