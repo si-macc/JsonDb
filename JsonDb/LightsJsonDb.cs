@@ -32,18 +32,25 @@ namespace JsonDb
         public void Reader(string FilePath)
         {
             //MyJsonDatabase = new JsonDatabase<SceneConfig>();
-            if (File.Exists(FilePath))       //Ok make sure the file is there
+            try
             {
-                StreamReader JsonFile = new StreamReader(FilePath);
-                JsonString = JsonFile.ReadToEnd();
-                JsonFile.Close();
-                CrestronConsole.PrintLine("File found" + JsonString + "\n\r");    //Generate error
-            }
-            else
-            {
-                CrestronConsole.PrintLine("File Not found\n\r");    //Generate error
-                JsonString = "";
+                if (File.Exists(FilePath))       //Ok make sure the file is there
+                {
+                    StreamReader JsonFile = new StreamReader(FilePath);
+                    JsonString = JsonFile.ReadToEnd();
+                    JsonFile.Close();
+                    CrestronConsole.PrintLine("File found" + JsonString + "\n\r");    //Generate error
+                }
+                else
+                {
+                    CrestronConsole.PrintLine("File Not found\n\r");    //Generate error
+                    JsonString = "";
 
+                }
+            }
+            catch (IOException)
+            {
+                CrestronConsole.PrintLine("Read JSON DB File IO Exception\n\r");    //Generate error
             }
 
             CrestronConsole.PrintLine("Extractor Starting...\n\r");    //Generate error
@@ -66,11 +73,18 @@ namespace JsonDb
 
         public void storeObjToFile(string FilePath)
         {
-            StreamWriter file = new StreamWriter(FilePath);
-            string ConfigSave = JsonConvert.SerializeObject(MySceneConfig);
-            file.Write(ConfigSave);
-            file.Flush();
-            file.Close();
+            try
+            {
+                StreamWriter file = new StreamWriter(FilePath);
+                string ConfigSave = JsonConvert.SerializeObject(MySceneConfig);
+                file.Write(ConfigSave);
+                file.Flush();
+                file.Close();
+            }
+            catch (IOException)
+            {
+                CrestronConsole.PrintLine("Write JSON DB File IO Exception\n\r");    //Generate error
+            }
         }
 
         public class SceneConfig
