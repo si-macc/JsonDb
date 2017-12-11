@@ -40,22 +40,23 @@ namespace JsonDb
                     JsonString = JsonFile.ReadToEnd();
                     JsonFile.Close();
                     CrestronConsole.PrintLine("File found" + JsonString + "\n\r");    //Generate error
+
+                    CrestronConsole.PrintLine("Extractor Starting...\n\r");    //Generate error
+                    MySceneConfig = JsonConvert.DeserializeObject<SceneConfig>(JsonString);
+                    CrestronConsole.PrintLine("Extractor Finished...\n\r");    //Generate error 
                 }
                 else
                 {
                     CrestronConsole.PrintLine("File Not found\n\r");    //Generate error
                     JsonString = "";
-
-                }
+                }                
             }
             catch (IOException)
             {
                 CrestronConsole.PrintLine("Read to JSON DB File IO Exception\n\r");    //Generate error
             }
 
-            CrestronConsole.PrintLine("Extractor Starting...\n\r");    //Generate error
-            MySceneConfig = JsonConvert.DeserializeObject<SceneConfig>(JsonString);
-            CrestronConsole.PrintLine("Extractor Finished...\n\r");    //Generate error 
+            
         }
 
         public void getCircuitValue(ushort roomIndex, ushort sceneIndex, ushort cirIndex)
